@@ -3,11 +3,15 @@
 ## Usage
 With Django 3.2.7 installed (Python 3.9.2)
 
-'''python manage.py runserver'''
+With /LSA as working directory
+```bash
+python manage.py runserver
+```
 
 Admin credentials:
-    username: LSA
-    password: testLSA1
+
+    {username: LSA,
+    password: testLSA1}
 
 The users can either login with the credentials provided above or sign up to create a new address book. Once the account is created, the
 user can then immediately sign in to the new account to access their address book.

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if user.is_authenticated %}
+{% for contact in data %}
+
+<div>
+    <p>---------------------------------------------------------------------------</p>
+    <p>Name: {{ contact.first_name }} {{ contact.last_name }}</p>
+    <p>Phone: {{ contact.phone_number }}</p>
+    <p>Email: {{ contact.email }}</p>
+    <p>Address :{{ contact.address }}</p>
+    <form action="{% url 'view' id=contact.id %}" method="post" style="float: left;">
+        {% csrf_token %}
+        <input type="submit" value="View">
+    </form>
+    <form action="{% url 'delete' id=contact.id %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Delete">
+    </form>
+</div>
+{% endfor %}
+
+{% else %}
+  <p>Welcome to the LSA Address Book, please login or sign up to create or view your contacts.</p>
+  
+  
+{% endif %}
+
+{% endblock %}

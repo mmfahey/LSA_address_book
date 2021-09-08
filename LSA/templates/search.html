@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<p>Contacts containing: {{query_name}}</p>
+
+{% for result in results %}
+
+<div>
+    <p>---------------------------------------------------------------------------</p>
+    <p>Name: {{ result.first_name }} {{ result.last_name }}</p>
+    <p>Phone: {{ result.phone_number }}</p>
+    <p>Email: {{ result.email }}</p>
+    <p>Address :{{ result.address }}</p>
+    <form action="{% url 'view' id=result.id %}" method="post" style="float: left;">
+        {% csrf_token %}
+        <input type="submit" value="View">
+    </form>
+    <form action="{% url 'delete' id=result.id %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Delete">
+    </form>
+</div>
+
+{% endfor %}
+
+{% endblock %}
+

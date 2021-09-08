@@ -1,0 +1,54 @@
+  <head>
+    <title>LSA Address Book</title>
+  </head>
+
+{% if user.is_authenticated %}
+  <header>
+    <div class="container">
+      <strong><nav>
+        <form action="{% url 'logout' %}">
+          <input type="submit" value="Log Out" />
+        </form>
+      </nav></strong>
+    </div>
+  </header>
+
+<h1>Contacts for {{ request.user.username }}</h1>
+
+<form action="{% url 'add' %}" style="float: left;">
+  <input type="submit" value="Add Contact" />
+</form>
+<form action="{% url 'contacts' %}">
+  <input type="submit" value="View All Contacts" />
+</form>
+
+<div>
+  <form action="{% url 'search' %}" method="POST" style="padding: 10px;">
+      {% csrf_token %} 
+      <input type="text" name="name">
+      <input type="submit" name="submit" value="Search Contacts">
+  </form>
+</div>
+
+{% else %}
+  <body>
+    <header>
+      <div class="container">
+        <strong><nav>
+            <form action="{% url 'login' %}" style="float: left;">
+              <input type="submit" value="Login" />
+            </form>
+            <form action="{% url 'signup' %}">
+              <input type="submit" value="Sign Up" />
+            </form>
+        </nav></strong>
+      </div>
+    </header>
+{%endif%}
+    {% block content %}
+    {% endblock %}
+  </body> 
+  <footer>
+    
+  </footer>
+</html>
